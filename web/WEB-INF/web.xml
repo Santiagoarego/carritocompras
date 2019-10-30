@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>CrearUsuario</servlet-name>
+        <servlet-class>Servlet.CrearUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AutenticarCliente</servlet-name>
+        <servlet-class>Servlet.AutenticarCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AutenticarAdmin</servlet-name>
+        <servlet-class>Servlet.AutenticarAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearProducto</servlet-name>
+        <servlet-class>Servlet.CrearProducto</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CrearUsuario</servlet-name>
+        <url-pattern>/cliente/registrar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutenticarCliente</servlet-name>
+        <url-pattern>/cliente/AutenticarCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AutenticarAdmin</servlet-name>
+        <url-pattern>/administracion/signin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearProducto</servlet-name>
+        <url-pattern>/administracion/CrearProducto</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
