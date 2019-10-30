@@ -59,7 +59,7 @@ public class GestionProveedor extends AbstractDB {
             ResultSet res = stmt.executeQuery("call getAllProveedores()");
             while (res.next()) {
                 Proveedor prod = new Proveedor();
-                prod.setId(res.getString("idProducto"));
+                prod.setId(res.getString("idProveedor"));
                 prod.setNombre(res.getString("nombre"));
                 
 

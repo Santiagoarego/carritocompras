@@ -4,6 +4,8 @@
     Author     : santi
 --%>
 
+<%@page import="administrativo.Proveedor"%>
+<%@page import="gestion.GestionProveedor"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="gestion.GestionProducto,administrativo.Producto"%>
@@ -11,7 +13,8 @@
 <%
     HttpSession sesion = request.getSession(true);
     Object username = sesion.getAttribute("username") == null ? null : sesion.getAttribute("username");
-
+    GestionProducto gp = new GestionProducto();
+    GestionProveedor gprov = new GestionProveedor();
 %>
 <!DOCTYPE html>
 <html>
@@ -54,9 +57,8 @@
                 <th>Existencias</th>
                 <th>Acciones</th>
                 </thead>
-                <%GestionProducto gp = new GestionProducto();
-                ArrayList<Producto> productos = gp.getTodos();
-                for(Producto prod: productos){%>
+                <%                    ArrayList<Producto> productos = gp.getTodos();
+                    for (Producto prod : productos) {%>
                 <tr>
                     <td><%= prod.getId()%></td>
                     <td><%= prod.getNombre()%></td>
@@ -66,22 +68,25 @@
                     <td></td>
                 </tr>
                 <%
-                }
-        
-        
-        %>
-                
+                    }
+
+
+                %>
+
             </table>
         </div>
         <div id="divAddProduct">
             <h1> Comprar producto</h1>
             <h3>Seleccione proveedor</h3>
-            
             <select>
-                <option value="Carulla">Carulla</option>
-                <option value="surtimax">Surtimax</option>
+                <% ArrayList<Proveedor> proveedores = gprov.getTodos();
+                    for (Proveedor prov : proveedores) {%>
+
+                <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
+                <% }%>
 
             </select>
+                
             <br>
             <br>
             <table id="addProduct" border="1" >
@@ -98,8 +103,10 @@
                 <tr>
 
                     <td><select>
-                            <option value="chocolate">Chocolate</option>
-                            <option value="condon">Condones</option>
+                            <% for (Producto prod : productos) {%>
+                            <option value="<%= prod.getId()%>"><%= prod.getNombre()%></option>
+                            <% }%>
+
 
                         </select>
                     </td>
@@ -119,7 +126,7 @@
             <button onClick="eliminarFila();">Eliminar producto</button>
             <button>COMPRAR</button>
         </div>
-        
+
 
 
 
