@@ -6,6 +6,7 @@
 package gestion;
 
 import administrativo.Producto;
+import administrativo.Proveedor;
 import administrativo.Usuario;
 import conexion.AbstractDB;
 import java.security.NoSuchAlgorithmException;
@@ -22,23 +23,21 @@ import javax.swing.JOptionPane;
  *
  * @author luismb
  */
-public class GestionProducto extends AbstractDB {
+public class GestionProveedor extends AbstractDB {
 
-    public GestionProducto() {
+    public GestionProveedor() {
         super();
     }
 
-    public boolean crearProducto(Producto prod) {
+    public boolean crearProveedor(Proveedor prov) {
         boolean flag = false;
         PreparedStatement pst = null;
         try {
-            String sql = "call newProducto(?,?,?,?,?)";
+            String sql = "call newProveedor(?,?)";
             pst = this.conn.prepareStatement(sql);
-            pst.setString(1, prod.getId());
-            pst.setString(2, prod.getNombre());
-            pst.setFloat(3, prod.getPrecioCompra());
-            pst.setFloat(4, prod.getPrecioVenta());
-            pst.setInt(5, prod.getExistencias());
+            pst.setString(1, prov.getId());
+            pst.setString(2, prov.getNombre());
+            
 
             if (pst.executeUpdate() == 1) {
                 flag = true;
@@ -51,22 +50,20 @@ public class GestionProducto extends AbstractDB {
         return flag;
     }
 
-    public ArrayList<Producto> getTodos() {
-        ArrayList<Producto> productos = new ArrayList();
+    public ArrayList<Proveedor> getTodos() {
+        ArrayList<Proveedor> proveedores = new ArrayList();
 
         try {
             Statement stmt = this.conn.createStatement();
 
-            ResultSet res = stmt.executeQuery("call getAllProducts()");
+            ResultSet res = stmt.executeQuery("call getAllProveedores()");
             while (res.next()) {
-                Producto prod = new Producto();
+                Proveedor prod = new Proveedor();
                 prod.setId(res.getString("idProducto"));
                 prod.setNombre(res.getString("nombre"));
-                prod.setPrecioCompra(res.getFloat("precioCompra"));
-                prod.setPrecioVenta(res.getFloat("precioVenta"));
-                prod.setExistencias(res.getInt("existencias"));
+                
 
-                productos.add(prod);
+                proveedores.add(prod);
                 
 
             }
@@ -76,7 +73,7 @@ public class GestionProducto extends AbstractDB {
             System.out.println(ex);
         }
 
-        return productos;
+        return proveedores;
 
     }
 

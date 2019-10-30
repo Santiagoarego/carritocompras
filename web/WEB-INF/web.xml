@@ -16,6 +16,10 @@
         <servlet-name>CrearProducto</servlet-name>
         <servlet-class>Servlet.CrearProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CrearProveedor</servlet-name>
+        <servlet-class>Servlet.CrearProveedor</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearUsuario</servlet-name>
         <url-pattern>/cliente/registrar</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CrearProducto</servlet-name>
         <url-pattern>/administracion/CrearProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearProveedor</servlet-name>
+        <url-pattern>/administracion/CrearProveedor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -37,6 +37,7 @@
             <input type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
             <input type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
             <a href="newProduct.jsp"><button>Crear producto</button></a>
+            <a href="newProveedor.jsp"><button>Crear proveedor</button></a>
 
         </div>
 
@@ -75,6 +76,7 @@
         <div id="divAddProduct">
             <h1> Comprar producto</h1>
             <h3>Seleccione proveedor</h3>
+            
             <select>
                 <option value="Carulla">Carulla</option>
                 <option value="surtimax">Surtimax</option>
