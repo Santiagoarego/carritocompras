@@ -88,6 +88,8 @@ p{
     color: darkgrey;
 }
 
-.login-box a:hover {
+.login-box a:hover
+{
     color: #fff;
+    
 }
