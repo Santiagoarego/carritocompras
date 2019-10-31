@@ -13,6 +13,7 @@
 <%
     HttpSession sesion = request.getSession(true);
     Object username = sesion.getAttribute("username") == null ? null : sesion.getAttribute("username");
+
     GestionProducto gp = new GestionProducto();
     GestionProveedor gprov = new GestionProveedor();
 %>
@@ -86,7 +87,7 @@
                 <% }%>
 
             </select>
-                
+
             <br>
             <br>
             <table id="addProduct" border="1" >
@@ -98,11 +99,11 @@
                 <th>Cantidad</th>
 
                 <th>Credito</th>
-                <th>Subtotal</th>
+
                 </thead>
                 <tr>
 
-                    <td><select>
+                    <td><select id="products">
                             <% for (Producto prod : productos) {%>
                             <option value="<%= prod.getId()%>"><%= prod.getNombre()%></option>
                             <% }%>
@@ -110,11 +111,11 @@
 
                         </select>
                     </td>
-                    <td><input type="Number" id="precompra0" onkeyup="calcularSubtotal('precompra0')" placeholder="Ingrese el Precio compra"></td>
-                    <td><input type="number" id="canticompra0" onkeyup="calcularSubtotal('canticompra0')" placeholder="Ingrese cantidad"></td>
+                    <td><input type="Number" id="precompra"  placeholder="Ingrese el Precio compra"></td>
+                    <td><input type="number" id="canticompra"  placeholder="Ingrese cantidad"></td>
 
-                    <td><input type="checkbox" id="credito0"> </td>
-                    <td><p id="subtotal0"></p></td>
+                    <td><input type="checkbox" id="credito"> </td>
+
 
 
                 </tr>
@@ -122,8 +123,23 @@
 
 
             </table>
+                            <br>
             <button onClick="agregarFila();">agregar producto</button>
             <button onClick="eliminarFila();">Eliminar producto</button>
+            <br>
+            <br>
+            <table id="totalProductos" border="1">
+                <thead>
+
+                <th>Producto</th>
+                <th>Precio compra</th>
+                <th>Cantidad</th>
+
+                <th>Credito</th>
+                <th>subtotal</th>
+
+                </thead> 
+            </table>
             <button>COMPRAR</button>
         </div>
 

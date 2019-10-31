@@ -7,48 +7,36 @@ function muestra_oculta(id) {
 window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
     muestra_oculta('divControlProducto');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
     muestra_oculta('divAddProduct');
-   
+
 }
 function agregarFila() {
-    var table = document.getElementById("addProduct");
+    var table = document.getElementById("totalProductos");
+    var e = document.getElementById("products");
+    var producto = e.options[e.selectedIndex].text;
+    var idproducto = e.options[e.selectedIndex].value;
+    var precioCompra = document.getElementById("precompra").value;
+    var cantidad = document.getElementById("canticompra").value;
+    var credito = document.getElementById("credito").checked;
     var rowCount = table.rows.length;
-    table.insertRow(-1).innerHTML = '<td><select><option value="chocolate">Chocolate</option><option value="condon">Condones</option></select></td><td><input type="Number" id="precompra' + (rowCount - 1) + '" placeholder="Ingrese el Precio compra"></td><td><input type="number" id="canticompra' + (rowCount - 1) + '" placeholder="Ingrese cantidad"></td><td><input type="checkbox" id="credito' + (rowCount - 1) + '"> </td><td><p id="subtotal' + (rowCount - 1) + '"></p></td>';
+    console.log(idproducto)
+    table.insertRow(-1).innerHTML = '<td><p id="'+idproducto+'">'+producto+'</p></td><td><p>'+precioCompra+'</p></td><td><p>'+cantidad+'</p></td><td><p>'+credito+'</p></td><td><p>'+(cantidad*precioCompra)+'</p></td>';
 }
 
 function eliminarFila() {
-    var table = document.getElementById("addProduct");
+    var table = document.getElementById("totalProductos");
     var rowCount = table.rows.length;
     //console.log(rowCount);
 
-    if (rowCount <= 2)
+    if (rowCount <= 1)
         alert('No se puede eliminar el encabezado');
     else
-        table.deleteRow(rowCount - 2);
+        table.deleteRow(rowCount - 1);
 }
 
-function agregarFilaProducto() {
-    var table = document.getElementById("newProduct");
-    var rowCount = table.rows.length;
-    table.insertRow(-1).innerHTML = '<td><input type="Number" id="precompra' + (rowCount - 1) + '" onkeyup="calcularSubtotal("precompra' + (rowCount - 1) + '")" placeholder="Ingrese el Precio compra"></td><td><input type="number" id="canticompra' + (rowCount - 1) + '" placeholder="Ingrese cantidad" onkeyup="calcularSubtotal("canticompra' + (rowCount - 1) + '")"></td><td><input type="checkbox" id="credito' + (rowCount - 1) + '"> </td><td><p id="subtotal' + (rowCount - 1) + '"></p></td>';
-}
 
-function eliminarFilaProducto() {
-    var table = document.getElementById("newProduct");
-    var rowCount = table.rows.length;
-    //console.log(rowCount);
 
-    if (rowCount <= 2)
-        alert('No se puede eliminar el encabezado');
-    else
-        table.deleteRow(rowCount - 2);
-}
-function calcularSubtotal(id) {
-    var cantidad = document.getElementById(id).value;
-    var precio = document.getElementById(id).value;
-    document.getElementById(id).innerHTML = (+cantidad) * (+precio);
-    console.log(((+cantidad) * (+precio)));
-}
-;
+
+
 
 
 $(function () {
