@@ -77,70 +77,74 @@
             </table>
         </div>
         <div id="divAddProduct">
-            <h1> Comprar producto</h1>
-            <h3>Seleccione proveedor</h3>
-            <select>
-                <% ArrayList<Proveedor> proveedores = gprov.getTodos();
-                    for (Proveedor prov : proveedores) {%>
+            <form action="CrearCompra" method="post">
+                <h1> Comprar producto</h1>
+                <h3>Seleccione proveedor</h3>
+                <select name="proveedores" id="proveedores">
+                    <% ArrayList<Proveedor> proveedores = gprov.getTodos();
+                        for (Proveedor prov : proveedores) {%>
 
-                <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
-                <% }%>
+                    <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
+                    <% }%>
 
-            </select>
+                </select>
+                <input name="fechacompra" type="date">
+                <br>
+                <br>
+                <table id="addProduct" border="1" >
 
-            <br>
-            <br>
-            <table id="addProduct" border="1" >
+                    <thead>
 
-                <thead>
+                    <th>Producto</th>
+                    <th>Precio compra</th>
+                    <th>Cantidad</th>
 
-                <th>Producto</th>
-                <th>Precio compra</th>
-                <th>Cantidad</th>
+                    <th>Credito</th>
 
-                <th>Credito</th>
+                    </thead>
+                    <tr>
 
-                </thead>
-                <tr>
-
-                    <td><select id="products">
-                            <% for (Producto prod : productos) {%>
-                            <option value="<%= prod.getId()%>"><%= prod.getNombre()%></option>
-                            <% }%>
-
-
-                        </select>
-                    </td>
-                    <td><input type="Number" id="precompra"  placeholder="Ingrese el Precio compra"></td>
-                    <td><input type="number" id="canticompra"  placeholder="Ingrese cantidad"></td>
-
-                    <td><input type="checkbox" id="credito"> </td>
+                        <td><select name="products" id="products">
+                                <% for (Producto prod : productos) {%>
+                                <option value="<%= prod.getId()%>"><%= prod.getNombre()%></option>
+                                <% }%>
 
 
+                            </select>
+                        </td>
+                        <td><input type="Number" id="precompra"  placeholder="Ingrese el Precio compra"></td>
+                        <td><input type="number" id="canticompra"  placeholder="Ingrese cantidad"></td>
 
-                </tr>
+                        <td><input type="checkbox" id="credito"> </td>
 
 
 
-            </table>
-                            <br>
+                    </tr>
+
+
+
+                </table>
+                <input type='number' id='cantidadFactura'  name="cantidadFactura" value='0'>
+                <br>
+
+                <br>
+                <br>
+                <table id="totalProductos" border="1">
+                    <thead>
+
+                    <th>Producto</th>
+                    <th>Precio compra</th>
+                    <th>Cantidad</th>
+
+                    <th>Credito</th>
+                    <th>subtotal</th>
+
+                    </thead> 
+                </table>
+                <input type="submit" value="comprar">
+            </form>
             <button onClick="agregarFila();">agregar producto</button>
             <button onClick="eliminarFila();">Eliminar producto</button>
-            <br>
-            <br>
-            <table id="totalProductos" border="1">
-                <thead>
-
-                <th>Producto</th>
-                <th>Precio compra</th>
-                <th>Cantidad</th>
-
-                <th>Credito</th>
-                <th>subtotal</th>
-
-                </thead> 
-            </table>
-            <button>COMPRAR</button>
         </div>
 
 

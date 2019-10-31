@@ -9,6 +9,7 @@ window.onload = function () {/*hace que se cargue la función lo que predetermin
     muestra_oculta('divAddProduct');
 
 }
+var cantidadproductos;
 function agregarFila() {
     var table = document.getElementById("totalProductos");
     var e = document.getElementById("products");
@@ -17,8 +18,12 @@ function agregarFila() {
     var precioCompra = document.getElementById("precompra").value;
     var cantidad = document.getElementById("canticompra").value;
     var credito = document.getElementById("credito").checked;
+    cantidadproductos = document.getElementById("cantidadFactura").value;
+    cantidadproductos++;
+    document.getElementById("cantidadFactura").value=cantidadproductos;
     var rowCount = table.rows.length;
     console.log(idproducto)
+    console.log(cantidadproductos);
     table.insertRow(-1).innerHTML = '<td><p id="'+idproducto+'">'+producto+'</p></td><td><p>'+precioCompra+'</p></td><td><p>'+cantidad+'</p></td><td><p>'+credito+'</p></td><td><p>'+(cantidad*precioCompra)+'</p></td>';
 }
 
@@ -31,6 +36,9 @@ function eliminarFila() {
         alert('No se puede eliminar el encabezado');
     else
         table.deleteRow(rowCount - 1);
+    cantidadproductos = document.getElementById("cantidadFactura").value;
+    cantidadproductos--;
+    document.getElementById("cantidadFactura").value=cantidadproductos;
 }
 
 
