@@ -79,16 +79,33 @@
         <div id="divAddProduct">
             <form action="CrearCompra" method="post">
                 <h1> Comprar producto</h1>
-                <h3>Seleccione proveedor</h3>
-                <select name="proveedores" id="proveedores">
-                    <% ArrayList<Proveedor> proveedores = gprov.getTodos();
-                        for (Proveedor prov : proveedores) {%>
+                <table border="1">
+                    <thead>
+                    <th>Proveedor</th>
+                    <th>Fecha compra</th>
+                    <th>Credito</th>
 
-                    <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
-                    <% }%>
+                    </thead>
+                    <tr>
+                        <td> <select name="proveedores" id="proveedores">
+                        <% ArrayList<Proveedor> proveedores = gprov.getTodos();
+                            for (Proveedor prov : proveedores) {%>
 
-                </select>
-                <input name="fechacompra" type="date">
+                        <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
+                        <% }%>
+
+                    </select>
+                    
+                        </td>
+                        <td>
+                    <input name="fechacompra" type="date">
+                        </td>
+                        <td>
+                    <input type="checkbox" name="credito" id="credito"> 
+                        </td>
+                    </tr>
+                </table>
+
                 <br>
                 <br>
                 <table id="addProduct" border="1" >
@@ -99,7 +116,7 @@
                     <th>Precio compra</th>
                     <th>Cantidad</th>
 
-                    <th>Credito</th>
+                    
 
                     </thead>
                     <tr>
@@ -115,7 +132,7 @@
                         <td><input type="Number" id="precompra"  placeholder="Ingrese el Precio compra"></td>
                         <td><input type="number" id="canticompra"  placeholder="Ingrese cantidad"></td>
 
-                        <td><input type="checkbox" id="credito"> </td>
+                        
 
 
 
@@ -136,7 +153,7 @@
                     <th>Precio compra</th>
                     <th>Cantidad</th>
 
-                    <th>Credito</th>
+                    
                     <th>subtotal</th>
 
                     </thead> 

@@ -31,14 +31,32 @@ public class CrearCompra extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        int id = Integer.parseInt(request.getParameter("cantidadFactura"));
         String idproveedor = request.getParameter("proveedores");
-        String fecha= request.getParameter("fechacompra");
-        out.println("Proveedor: "+idproveedor);
-        out.println("Fecha Compra: "+fecha);
-       for (int i = 1;i<=id;i++){
-           out.println(i);
-       }
+        String credito = request.getParameter("credito");
+        if (credito==null){
+            credito="false";
+        }else{
+            credito="true";
+        }
+        String fecha = request.getParameter("fechacompra");
+        int id = Integer.parseInt(request.getParameter("cantidadFactura"));
+        out.println("Proveedor: " + idproveedor);
+        out.println("<br>Fecha Compra: " + fecha);
+        out.println("<br> credito "+credito);
+        
+        float total = 0;
+        for (int i = 1; i <= id; i++) {
+            String producto = request.getParameter("prod" + i);
+            Float precio = Float.parseFloat(request.getParameter("precio" + i));
+            int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
+            
+            out.println("<br>Producto: " + producto + " Precio: " + precio + " Cantidad: " + cantidad + "<br>");
+            total += cantidad * precio;
+
+        }
+
+        out.println("<br>Total: "+total);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

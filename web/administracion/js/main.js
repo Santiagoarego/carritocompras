@@ -1,3 +1,4 @@
+var cantidadproductos;
 function muestra_oculta(id) {
     if (document.getElementById) { //se obtiene el id
         var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
@@ -7,9 +8,10 @@ function muestra_oculta(id) {
 window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
     muestra_oculta('divControlProducto');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
     muestra_oculta('divAddProduct');
-
+    cantidadproductos = 0;
+    document.getElementById("cantidadFactura").value=0;
 }
-var cantidadproductos;
+
 function agregarFila() {
     var table = document.getElementById("totalProductos");
     var e = document.getElementById("products");
@@ -17,14 +19,14 @@ function agregarFila() {
     var idproducto = e.options[e.selectedIndex].value;
     var precioCompra = document.getElementById("precompra").value;
     var cantidad = document.getElementById("canticompra").value;
-    var credito = document.getElementById("credito").checked;
+    
     cantidadproductos = document.getElementById("cantidadFactura").value;
     cantidadproductos++;
-    document.getElementById("cantidadFactura").value=cantidadproductos;
+    document.getElementById("cantidadFactura").value = cantidadproductos;
     var rowCount = table.rows.length;
     console.log(idproducto)
     console.log(cantidadproductos);
-    table.insertRow(-1).innerHTML = '<td><p id="'+idproducto+'">'+producto+'</p></td><td><p>'+precioCompra+'</p></td><td><p>'+cantidad+'</p></td><td><p>'+credito+'</p></td><td><p>'+(cantidad*precioCompra)+'</p></td>';
+    table.insertRow(-1).innerHTML = '<td><input type="text" name="prod' + cantidadproductos + '" value="' + producto + '" readonly ></td><td><input type="number" name="precio' + cantidadproductos + '" value="' + precioCompra + '" readonly> </td><td><input type="number" name="cantidad' + cantidadproductos + '" value="' + cantidad + '" readonly></td><td><p>' + (cantidad * precioCompra) + '</p></td>';
 }
 
 function eliminarFila() {
@@ -38,7 +40,7 @@ function eliminarFila() {
         table.deleteRow(rowCount - 1);
     cantidadproductos = document.getElementById("cantidadFactura").value;
     cantidadproductos--;
-    document.getElementById("cantidadFactura").value=cantidadproductos;
+    document.getElementById("cantidadFactura").value = cantidadproductos;
 }
 
 
