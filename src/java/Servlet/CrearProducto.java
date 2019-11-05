@@ -35,7 +35,7 @@ public class CrearProducto extends HttpServlet {
         String id = request.getParameter("id");
         String nombre = request.getParameter("nombre");
 
-        Producto prod = new Producto(id, nombre, 0, 0, 0);
+        Producto prod = new Producto(id, nombre, 0, 0, 0,"sinFoto.png");
         GestionProducto gp = new GestionProducto();
         if (gp.crearProducto(prod)) {
             response.getWriter().print("El producto ha sido registrado correctamente");

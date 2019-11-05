@@ -16,6 +16,7 @@ public class Producto {
     private float precioCompra;
     private float precioVenta;
     private int existencias;
+    private String nombreFoto;
 
     public Producto() {
         this.nombre = "";
@@ -24,16 +25,17 @@ public class Producto {
         this.precioCompra = 0;
         this.precioVenta = 0;
         this.existencias = 0;
+        this.nombreFoto = "";
 
     }
 
-    public Producto(String id, String nombre,float precioCompra, float precioVenta, int existencias) {
+    public Producto(String id, String nombre, float precioCompra, float precioVenta, int existencias, String nombreFoto) {
         this.id = id;
         this.nombre = nombre;
-        this.precioCompra=precioCompra;
+        this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
-        this.existencias=existencias;
-
+        this.existencias = existencias;
+        this.nombreFoto = nombreFoto;
     }
 
     public String getId() {
@@ -76,5 +78,13 @@ public class Producto {
         this.existencias = existencias;
     }
 
+    public String getNombreFoto() {
+        return nombreFoto;
+    }
+
+    public void setNombreFoto(String nombreFoto) {
+        this.nombreFoto = nombreFoto;
+    }
     
+
 }
