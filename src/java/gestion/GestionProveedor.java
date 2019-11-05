@@ -33,10 +33,10 @@ public class GestionProveedor extends AbstractDB {
         boolean flag = false;
         PreparedStatement pst = null;
         try {
-            String sql = "call newProveedor(?,?)";
+            String sql = "call newProveedor(?)";
             pst = this.conn.prepareStatement(sql);
-            pst.setString(1, prov.getId());
-            pst.setString(2, prov.getNombre());
+            
+            pst.setString(1, prov.getNombre());
             
 
             if (pst.executeUpdate() == 1) {

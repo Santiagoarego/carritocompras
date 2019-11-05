@@ -32,14 +32,14 @@ public class GestionProducto extends AbstractDB {
         boolean flag = false;
         PreparedStatement pst = null;
         try {
-            String sql = "call newProducto(?,?,?,?,?,?)";
+            String sql = "call newProducto(?,?,?,?,?)";
             pst = this.conn.prepareStatement(sql);
-            pst.setString(1, prod.getId());
-            pst.setString(2, prod.getNombre());
-            pst.setFloat(3, prod.getPrecioCompra());
-            pst.setFloat(4, prod.getPrecioVenta());
-            pst.setInt(5, prod.getExistencias());
-            pst.setString(6, prod.getNombreFoto());
+            System.out.println(prod.getNombre());
+            pst.setString(1, prod.getNombre());
+            pst.setFloat(2, prod.getPrecioCompra());
+            pst.setFloat(3, prod.getPrecioVenta());
+            pst.setInt(4, prod.getExistencias());
+            pst.setString(5, prod.getNombreFoto());
 
             if (pst.executeUpdate() == 1) {
                 flag = true;

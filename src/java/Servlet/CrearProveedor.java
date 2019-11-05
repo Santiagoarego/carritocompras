@@ -33,10 +33,10 @@ public class CrearProveedor extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
+        
         String nombre = request.getParameter("nombre");
 
-        Proveedor prod = new Proveedor(id, nombre);
+        Proveedor prod = new Proveedor( nombre);
         GestionProveedor gp = new GestionProveedor();
         if (gp.crearProveedor(prod)) {
             response.getWriter().print("El proveedor ha sido registrado correctamente");

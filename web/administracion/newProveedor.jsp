@@ -43,12 +43,12 @@
                 <table id="newProveedor" border="1" >
 
                     <thead>
-                    <th>ID Proveedor</th>
+                    
                     <th>Nombre proveedor</th>
 
                     </thead>
                     <tr>
-                        <td><input type="Text" name= "id" placeholder="Ingrese el id"></td>
+                        
                         <td><input type="Text" name="nombre" placeholder="Ingrese el Nombre"></td>
 
 

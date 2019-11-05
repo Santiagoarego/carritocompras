@@ -13,20 +13,23 @@ public class Proveedor {
 
     private String id;
     private String nombre;
-    
 
     public Proveedor() {
         this.nombre = "";
 
         this.id = "";
-       
 
     }
 
     public Proveedor(String id, String nombre) {
         this.id = id;
         this.nombre = nombre;
-        
+
+    }
+
+    public Proveedor(String nombre) {
+
+        this.nombre = nombre;
 
     }
 
@@ -46,6 +49,4 @@ public class Proveedor {
         this.nombre = nombre;
     }
 
-    
-    
 }

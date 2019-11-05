@@ -37,6 +37,14 @@ public class Producto {
         this.existencias = existencias;
         this.nombreFoto = nombreFoto;
     }
+    public Producto( String nombre, float precioCompra, float precioVenta, int existencias, String nombreFoto) {
+       
+        this.nombre = nombre;
+        this.precioCompra = precioCompra;
+        this.precioVenta = precioVenta;
+        this.existencias = existencias;
+        this.nombreFoto = nombreFoto;
+    }
 
     public String getId() {
         return id;

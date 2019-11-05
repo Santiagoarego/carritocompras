@@ -43,16 +43,16 @@
                 <table id="newProduct" border="1" >
 
                     <thead>
-                    <th>ID PRODUCTO</th>
+
                     <th>Nombre</th>
                     <th>Foto</th>
 
                     </thead>
                     <tr>
-                        <td><input type="Text" name= "id" placeholder="Ingrese el id"></td>
+
                         <td><input type="Text" name="nombre" placeholder="Ingrese el Nombre"></td>
-                        <td><input type="file" name="foto" accept="../imgprodu/*"></td>
-                        
+                        <td><input type="file" name="foto" accept="image/png, .jpeg, .jpg, image/gif"></td>
+
 
                     </tr>
 

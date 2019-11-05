@@ -32,10 +32,10 @@ public class CrearProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id = request.getParameter("id");
+        
         String nombre = request.getParameter("nombre");
 
-        Producto prod = new Producto(id, nombre, 0, 0, 0,"sinFoto.png");
+        Producto prod = new Producto( nombre, 0, 0, 0,"sinFoto.png");
         GestionProducto gp = new GestionProducto();
         if (gp.crearProducto(prod)) {
             response.getWriter().print("El producto ha sido registrado correctamente");
