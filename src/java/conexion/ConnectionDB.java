@@ -16,7 +16,7 @@ public class ConnectionDB
     
     public ConnectionDB() 
     {        
-        this.url = "jdbc:mysql://localhost:3306/mydb?user=root&password=santi1010";
+        this.url = "jdbc:mysql://localhost:3306/tienda?user=root&password=santi1010";
         try 
         {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();//para MySQL 8.x..x

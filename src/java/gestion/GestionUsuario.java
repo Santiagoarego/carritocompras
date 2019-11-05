@@ -56,6 +56,7 @@ public class GestionUsuario extends AbstractDB {
 
     public Usuario loginUsuario(String usuario, String pass) {
         Usuario user = null;
+        
 
         try {
             ResultSet res;
@@ -69,8 +70,8 @@ public class GestionUsuario extends AbstractDB {
                 user.setId(res.getString("idUsuario"));
                 user.setNombre(res.getString("nombre"));
                 user.setApellido("apellido");
-                user.setUsuario(res.getString("username"));
-                user.setPassword(res.getString("pass"));
+                user.setUsuario(res.getString("usuario"));
+                user.setPassword(res.getString("password"));
                 user.setCorreo(res.getString("correo"));
                 user.setRango(res.getInt("rango"));
 
