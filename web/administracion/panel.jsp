@@ -151,7 +151,7 @@
                 <br>
                 <table id="totalProductos" border="1">
                     <thead>
-
+                    <th>ID</th>
                     <th>Producto</th>
                     <th>Precio compra</th>
                     <th>Cantidad</th>

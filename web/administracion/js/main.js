@@ -36,7 +36,7 @@ function agregarFila() {
             var rowCount = table.rows.length;
             console.log(idproducto)
             console.log(cantidadproductos);
-            table.insertRow(-1).innerHTML = '<td><input type="text" name="prod' + cantidadproductos + '" value="' + producto + '" readonly ></td><td><input type="number" name="precio' + cantidadproductos + '" value="' + precioCompra + '" readonly> </td><td><input type="number" name="cantidad' + cantidadproductos + '" value="' + cantidad + '" readonly></td><td><p>' + (cantidad * precioCompra) + '</p></td>';
+            table.insertRow(-1).innerHTML = '<td><input type="number" name="id'+cantidadproductos+'" value="'+idproducto+'" readonly></td><td><input type="text" name="prod' + cantidadproductos + '" value="' + producto + '" readonly ></td><td><input type="number" name="precio' + cantidadproductos + '" value="' + precioCompra + '" readonly> </td><td><input type="number" name="cantidad' + cantidadproductos + '" value="' + cantidad + '" readonly></td><td><p>' + (cantidad * precioCompra) + '</p></td>';
         } else {
             alert("Ingrese precio y cantidad");
         }

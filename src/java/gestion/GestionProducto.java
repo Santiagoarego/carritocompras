@@ -46,10 +46,24 @@ public class GestionProducto extends AbstractDB {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } finally {
-            cierraConexion();
         }
         return flag;
+    }
+
+    public void actualizarProducto(int id, int cantidad,float precio) {
+        PreparedStatement pst = null;
+        try {
+            String sql = "call updateProductoCompra(?,?,?)";
+            pst = this.conn.prepareStatement(sql);
+            pst.setInt(1,id);
+            pst.setInt(2, cantidad);
+            pst.setFloat(3, precio);
+            
+            pst.executeQuery();
+
+        } catch (Exception E) {
+            System.err.println(E.getMessage());
+        }
     }
 
     public ArrayList<Producto> getTodos() {
@@ -69,7 +83,6 @@ public class GestionProducto extends AbstractDB {
                 prod.setNombreFoto(res.getString("nombreFoto"));
 
                 productos.add(prod);
-                
 
             }
             res.close();
@@ -81,8 +94,6 @@ public class GestionProducto extends AbstractDB {
         return productos;
 
     }
-
-    
 
     public void cierraConexion() {
         try {

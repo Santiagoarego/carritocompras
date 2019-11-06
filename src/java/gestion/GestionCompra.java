@@ -50,6 +50,7 @@ public class GestionCompra extends AbstractDB {
         } 
         return flag;
     }
+    
 
     public Compra getLastCompra() {
         Compra com = new Compra();
@@ -66,6 +67,7 @@ public class GestionCompra extends AbstractDB {
                 com.setFecha(res.getString("fecha"));
                 com.setCredito(res.getInt("credito"));
                 com.setAbono(res.getFloat("abono"));
+                
 
             }
             res.close();
@@ -76,6 +78,24 @@ public class GestionCompra extends AbstractDB {
 
         return com;
 
+    }
+    public boolean crearDetalles(int idcompra,int idproducto,float precio,int cantidad) {
+        boolean flag = false;
+        PreparedStatement pst = null;
+        try {
+            String sql = "call newCompraProducto(?,?,?,?)";
+            pst = this.conn.prepareStatement(sql);
+
+            pst.setInt(1, idcompra);
+            pst.setInt(2, idproducto);
+            pst.setFloat(3,precio);
+            pst.setInt(4, cantidad);
+
+            pst.executeQuery();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } 
+        return flag;
     }
 
     public void cierraConexion() {
