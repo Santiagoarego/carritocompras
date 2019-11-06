@@ -5,6 +5,8 @@
  */
 package Servlet;
 
+import administrativo.Compra;
+import gestion.GestionCompra;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,32 +33,43 @@ public class CrearCompra extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String idproveedor = request.getParameter("proveedores");
-        String credito = request.getParameter("credito");
-        if (credito==null){
-            credito="false";
-        }else{
-            credito="true";
+        GestionCompra gc = new GestionCompra();
+        Compra compra;
+        int idproveedor = Integer.parseInt(request.getParameter("proveedores"));
+        String cred = request.getParameter("credito");
+        int credito;
+        if (cred == null) {
+            credito = 0;
+        } else {
+            credito = 1;
         }
         String fecha = request.getParameter("fechacompra");
         int id = Integer.parseInt(request.getParameter("cantidadFactura"));
         out.println("Proveedor: " + idproveedor);
         out.println("<br>Fecha Compra: " + fecha);
-        out.println("<br> credito "+credito);
-        
+        out.println("<br> credito " + credito);
+
         float total = 0;
         for (int i = 1; i <= id; i++) {
             String producto = request.getParameter("prod" + i);
             Float precio = Float.parseFloat(request.getParameter("precio" + i));
             int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
-            
+
             out.println("<br>Producto: " + producto + " Precio: " + precio + " Cantidad: " + cantidad + "<br>");
             total += cantidad * precio;
 
         }
+        compra = new Compra(idproveedor, total, fecha, credito, 0);
+        out.println("<br>Total: " + total);
+        if (gc.crearCompra(compra)) {
+            response.getWriter().print("La compra ha sida registrado correctamente");
 
-        out.println("<br>Total: "+total);
+        } else {
+            response.getWriter().print("El producto no ha sido registrado correctamente");
 
+        }
+
+        response.getWriter().print("Asociado a la compra "+gc.getLastCompra().getId());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,24 +9,40 @@ window.onload = function () {/*hace que se cargue la función lo que predetermin
     muestra_oculta('divControlProducto');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
     muestra_oculta('divAddProduct');
     cantidadproductos = 0;
-    document.getElementById("cantidadFactura").value=0;
+    document.getElementById("cantidadFactura").value = 0;
 }
-
+var productos = [];
 function agregarFila() {
+    var esta = false;
     var table = document.getElementById("totalProductos");
     var e = document.getElementById("products");
     var producto = e.options[e.selectedIndex].text;
     var idproducto = e.options[e.selectedIndex].value;
     var precioCompra = document.getElementById("precompra").value;
     var cantidad = document.getElementById("canticompra").value;
-    
-    cantidadproductos = document.getElementById("cantidadFactura").value;
-    cantidadproductos++;
-    document.getElementById("cantidadFactura").value = cantidadproductos;
-    var rowCount = table.rows.length;
-    console.log(idproducto)
-    console.log(cantidadproductos);
-    table.insertRow(-1).innerHTML = '<td><input type="text" name="prod' + cantidadproductos + '" value="' + producto + '" readonly ></td><td><input type="number" name="precio' + cantidadproductos + '" value="' + precioCompra + '" readonly> </td><td><input type="number" name="cantidad' + cantidadproductos + '" value="' + cantidad + '" readonly></td><td><p>' + (cantidad * precioCompra) + '</p></td>';
+    for (var i = 0; i < productos.length; i++) {
+        if (productos[i] == idproducto) {
+            esta = true;
+
+        }
+        console.log(productos[i]);
+    }
+    if (!esta) {
+        if (precioCompra != "" && cantidad != "") {
+            productos.push(idproducto);
+            cantidadproductos = document.getElementById("cantidadFactura").value;
+            cantidadproductos++;
+            document.getElementById("cantidadFactura").value = cantidadproductos;
+            var rowCount = table.rows.length;
+            console.log(idproducto)
+            console.log(cantidadproductos);
+            table.insertRow(-1).innerHTML = '<td><input type="text" name="prod' + cantidadproductos + '" value="' + producto + '" readonly ></td><td><input type="number" name="precio' + cantidadproductos + '" value="' + precioCompra + '" readonly> </td><td><input type="number" name="cantidad' + cantidadproductos + '" value="' + cantidad + '" readonly></td><td><p>' + (cantidad * precioCompra) + '</p></td>';
+        } else {
+            alert("Ingrese precio y cantidad");
+        }
+    } else {
+        alert("el producto ya esta");
+    }
 }
 
 function eliminarFila() {
@@ -41,11 +57,26 @@ function eliminarFila() {
     cantidadproductos = document.getElementById("cantidadFactura").value;
     cantidadproductos--;
     document.getElementById("cantidadFactura").value = cantidadproductos;
+    productos.pop();
 }
 
 
 
+function validateForm()
+{
+    // Aqui vas comprobando tus datos
 
+    if (cantidadproductos > 0) {
+        return true;
+    } else {
+        alert("No ha agregado productos");
+        return false;
+    }
+
+    //
+
+
+}
 
 
 
@@ -55,12 +86,12 @@ $(function () {
             nombre: {
                 required: true
             },
-            id: {
+            foto: {
                 required: true
             }
 
 
-        },
+        }/*,
         submitHandler: function (form) {
             var data = $('#newproduct').serialize();
             $.post("CrearProducto", data, function (res, est, jqXHR) {
@@ -72,6 +103,8 @@ $(function () {
                     location.href = "./newProduct.jsp";
                 }
             });
-        }});
+        }*/});
 
 });
+
+

@@ -24,6 +24,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script type="text/javascript" src="./js/main.js"></script>
+
     </head>
 
     <body>
@@ -51,6 +52,7 @@
             <table id="controlProducto" border="1">
 
                 <thead>
+                <th>FOTO</th>
                 <th>ID PRODUCTO</th>
                 <th>Nombre</th>
                 <th>Precio compra</th>
@@ -61,6 +63,7 @@
                 <%                    ArrayList<Producto> productos = gp.getTodos();
                     for (Producto prod : productos) {%>
                 <tr>
+                    <td><image src="../imgprodu/<%= prod.getNombreFoto()%>" width="100" height="100"></td>
                     <td><%= prod.getId()%></td>
                     <td><%= prod.getNombre()%></td>
                     <td><%= prod.getPrecioCompra()%></td>
@@ -77,7 +80,7 @@
             </table>
         </div>
         <div id="divAddProduct">
-            <form action="CrearCompra" method="post">
+            <form action="CrearCompra" id="compra" method="post" onsubmit="return validateForm();">
                 <h1> Comprar producto</h1>
                 <table border="1">
                     <thead>
@@ -87,21 +90,21 @@
 
                     </thead>
                     <tr>
-                        <td> <select name="proveedores" id="proveedores">
-                        <% ArrayList<Proveedor> proveedores = gprov.getTodos();
-                            for (Proveedor prov : proveedores) {%>
+                        <td> <select name="proveedores" id="proveedores" required>
+                                <% ArrayList<Proveedor> proveedores = gprov.getTodos();
+                                    for (Proveedor prov : proveedores) {%>
 
-                        <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
-                        <% }%>
+                                <option value="<%=prov.getId()%>"><%=prov.getNombre()%></option>
+                                <% }%>
 
-                    </select>
-                    
+                            </select>
+
                         </td>
                         <td>
-                    <input name="fechacompra" type="date">
+                            <input name="fechacompra" type="date" required>
                         </td>
                         <td>
-                    <input type="checkbox" name="credito" id="credito"> 
+                            <input type="checkbox" name="credito" id="credito"> 
                         </td>
                     </tr>
                 </table>
@@ -116,7 +119,7 @@
                     <th>Precio compra</th>
                     <th>Cantidad</th>
 
-                    
+
 
                     </thead>
                     <tr>
@@ -132,7 +135,7 @@
                         <td><input type="Number" id="precompra"  placeholder="Ingrese el Precio compra"></td>
                         <td><input type="number" id="canticompra"  placeholder="Ingrese cantidad"></td>
 
-                        
+
 
 
 
@@ -153,7 +156,7 @@
                     <th>Precio compra</th>
                     <th>Cantidad</th>
 
-                    
+
                     <th>subtotal</th>
 
                     </thead> 

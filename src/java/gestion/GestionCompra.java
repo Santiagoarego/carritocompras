@@ -5,6 +5,7 @@
  */
 package gestion;
 
+import administrativo.Compra;
 import administrativo.Producto;
 import administrativo.Usuario;
 import conexion.AbstractDB;
@@ -22,54 +23,49 @@ import javax.swing.JOptionPane;
  *
  * @author luismb
  */
-public class GestionProducto extends AbstractDB {
+public class GestionCompra extends AbstractDB {
 
-    public GestionProducto() {
+    public GestionCompra() {
         super();
     }
 
-    public boolean crearProducto(Producto prod) {
+    public boolean crearCompra(Compra compra) {
         boolean flag = false;
         PreparedStatement pst = null;
         try {
-            String sql = "call newProducto(?,?,?,?,?)";
+            String sql = "call newCompra(?,?,?,?,?)";
             pst = this.conn.prepareStatement(sql);
-            System.out.println(prod.getNombre());
-            pst.setString(1, prod.getNombre());
-            pst.setFloat(2, prod.getPrecioCompra());
-            pst.setFloat(3, prod.getPrecioVenta());
-            pst.setInt(4, prod.getExistencias());
-            pst.setString(5, prod.getNombreFoto());
+
+            pst.setInt(1, compra.getIdproveedor());
+            pst.setFloat(2, compra.getTotal());
+            pst.setString(3, compra.getFecha());
+            pst.setInt(4, compra.getCredito());
+            pst.setFloat(5, compra.getAbono());
 
             if (pst.executeUpdate() == 1) {
                 flag = true;
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } finally {
-            cierraConexion();
-        }
+        } 
         return flag;
     }
 
-    public ArrayList<Producto> getTodos() {
-        ArrayList<Producto> productos = new ArrayList();
+    public Compra getLastCompra() {
+        Compra com = new Compra();
 
         try {
             Statement stmt = this.conn.createStatement();
 
-            ResultSet res = stmt.executeQuery("call getAllProducts()");
+            ResultSet res = stmt.executeQuery("call getLastCompra()");
             while (res.next()) {
-                Producto prod = new Producto();
-                prod.setId(res.getString("idProducto"));
-                prod.setNombre(res.getString("nombre"));
-                prod.setPrecioCompra(res.getFloat("precioCompra"));
-                prod.setPrecioVenta(res.getFloat("precioVenta"));
-                prod.setExistencias(res.getInt("existencias"));
-                prod.setNombreFoto(res.getString("nombreFoto"));
 
-                productos.add(prod);
-                
+                com.setId(res.getInt("idCompra"));
+                com.setIdproveedor(res.getInt("idProveedor"));
+                com.setTotal(res.getFloat("Total"));
+                com.setFecha(res.getString("fecha"));
+                com.setCredito(res.getInt("credito"));
+                com.setAbono(res.getFloat("abono"));
 
             }
             res.close();
@@ -78,11 +74,9 @@ public class GestionProducto extends AbstractDB {
             System.out.println(ex);
         }
 
-        return productos;
+        return com;
 
     }
-
-    
 
     public void cierraConexion() {
         try {

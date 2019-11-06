@@ -9,10 +9,12 @@ import administrativo.Producto;
 import gestion.GestionProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -32,19 +34,27 @@ public class CrearProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        Producto prod;
         String nombre = request.getParameter("nombre");
 
-        Producto prod = new Producto( nombre, 0, 0, 0,"sinFoto.png");
-        GestionProducto gp = new GestionProducto();
-        if (gp.crearProducto(prod)) {
-            response.getWriter().print("El producto ha sido registrado correctamente");
-            
-
+        String foto = request.getParameter("foto");
+        if (foto == null) {
+            prod = new Producto(nombre, 0, 0, 0, "sinFoto.png");
         } else {
-            response.getWriter().print("El producto no ha sido registrado correctamente");
-            
+            prod = new Producto(nombre, 0, 0, 0, foto);
         }
+        
+        GestionProducto gp = new GestionProducto();
+        
+        if (gp.crearProducto(prod)) {
+         response.getWriter().print("<script>alert('El producto ha sido registrado correctamente')</script>");
+         response.sendRedirect("panel.jsp");
+
+         } else {
+         response.getWriter().print("<script>alert('El producto no ha sido registrado correctamente')</script>");
+         
+         response.sendRedirect("newProduct.jsp");
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
