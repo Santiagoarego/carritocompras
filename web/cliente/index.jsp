@@ -23,7 +23,7 @@
         <script type="text/javascript" src="./js/main.js"></script>
     </head>
     <body>
-
+        
         <div class="login-box">
             <img src="img/logo.png" class="avatar" alt="Avatar Image">
             <h1>Login Here</h1>

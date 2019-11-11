@@ -47,10 +47,9 @@ public class GestionCompra extends AbstractDB {
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } 
+        }
         return flag;
     }
-    
 
     public Compra getLastCompra() {
         Compra com = new Compra();
@@ -67,7 +66,6 @@ public class GestionCompra extends AbstractDB {
                 com.setFecha(res.getString("fecha"));
                 com.setCredito(res.getInt("credito"));
                 com.setAbono(res.getFloat("abono"));
-                
 
             }
             res.close();
@@ -79,7 +77,8 @@ public class GestionCompra extends AbstractDB {
         return com;
 
     }
-    public boolean crearDetalles(int idcompra,int idproducto,float precio,int cantidad) {
+
+    public boolean crearDetalles(int idcompra, int idproducto, float precio, int cantidad) {
         boolean flag = false;
         PreparedStatement pst = null;
         try {
@@ -88,14 +87,28 @@ public class GestionCompra extends AbstractDB {
 
             pst.setInt(1, idcompra);
             pst.setInt(2, idproducto);
-            pst.setFloat(3,precio);
+            pst.setFloat(3, precio);
             pst.setInt(4, cantidad);
 
             pst.executeQuery();
         } catch (Exception e) {
             System.err.println(e.getMessage());
-        } 
+        }
         return flag;
+    }
+
+    public void ProveedorProducto(int idprov, int idprod) {
+        PreparedStatement pst = null;
+        try {
+            String sql = "call newProveedorProducto(?,?)";
+            pst = this.conn.prepareStatement(sql);
+            pst.setInt(1, idprov);
+            pst.setInt(2, idprod);
+            pst.executeQuery();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void cierraConexion() {

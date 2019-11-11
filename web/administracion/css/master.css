@@ -1,8 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(../img/bg.jpeg) no-repeat center top;
-    background-size: cover;
+   
     font-family: sans-serif;
     height: 100vh;
 }
@@ -92,4 +91,14 @@ p{
 {
     color: #fff;
     
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
