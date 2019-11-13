@@ -8,6 +8,7 @@ function muestra_oculta(id) {
 window.onload = function () {/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
     muestra_oculta('divControlProducto');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
     muestra_oculta('divAddProduct');
+    muestra_oculta('divFacturacion');
     cantidadproductos = 0;
     document.getElementById("cantidadFactura").value = 0;
 }
@@ -43,6 +44,12 @@ function agregarFila() {
     } else {
         alert("el producto ya esta");
     }
+}
+
+function idCompra(id){
+    var idCompra=document.getElementById(id).name;
+    document.getElementByName("idcompra").value=idCompra;
+    
 }
 
 function eliminarFila() {

@@ -111,6 +111,91 @@ public class GestionCompra extends AbstractDB {
         }
     }
 
+    public ArrayList<Compra> getTodos() {
+        ArrayList<Compra> compras = new ArrayList();
+
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            ResultSet res = stmt.executeQuery("call getAllCompras()");
+            while (res.next()) {
+                Compra com = new Compra();
+                com.setId(res.getInt("idCompra"));
+                com.setFecha(res.getString("Fecha"));
+                com.setTotal(res.getFloat("total"));
+
+                compras.add(com);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return compras;
+
+    }
+
+    public ArrayList<Producto> getProductosCompra( int id) {
+        ArrayList<Producto> compras = new ArrayList();
+
+        try {
+
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getProductosCompra(?)");
+            stmt.setInt(1, id);
+
+            res = stmt.executeQuery();
+            while (res.next()) {
+                Producto prod= new Producto();
+               prod.setNombre(res.getString("Nombre"));
+               prod.setPrecioCompra(res.getFloat("precio"));
+               prod.setExistencias(res.getInt("cantidad"));
+
+                compras.add(prod);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return compras;
+
+    }
+
+    public Compra getCompra(int id) {
+
+        Compra com = null;
+        try {
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getCompra(?)");
+            stmt.setInt(1, id);
+
+            res = stmt.executeQuery();
+            while (res.next()) {
+                com = new Compra();
+                com.setId(res.getInt("idCompra"));
+                com.setFecha(res.getString("Fecha"));
+                com.setTotal(res.getFloat("total"));
+                com.setAbono(res.getFloat("abono"));
+                com.setIdproveedor(res.getInt("idProveedor"));
+                com.setCredito(res.getInt("credito"));
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+
+        }
+
+        return com;
+
+    }
+
     public void cierraConexion() {
         try {
             this.conn.close();

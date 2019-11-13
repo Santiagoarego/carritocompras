@@ -4,6 +4,8 @@
     Author     : santi
 --%>
 
+<%@page import="administrativo.Compra"%>
+<%@page import="gestion.GestionCompra"%>
 <%@page import="administrativo.Proveedor"%>
 <%@page import="gestion.GestionProveedor"%>
 <%@page import="java.util.ArrayList"%>
@@ -16,6 +18,7 @@
 
     GestionProducto gp = new GestionProducto();
     GestionProveedor gprov = new GestionProveedor();
+    GestionCompra gcompra = new GestionCompra();
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +45,7 @@
         <div>
             <input type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
             <input type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
+            <input type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
             <a href="newProduct.jsp"><button>Crear producto</button></a>
             <a href="newProveedor.jsp"><button>Crear proveedor</button></a>
 
@@ -113,7 +117,7 @@
                 <br>
                 <br>
                 <h2>Seleccion de producto</h2>
-                    
+
                 <table id="addProduct" border="1" >
 
                     <thead>
@@ -169,6 +173,41 @@
             </form>
             <button onClick="agregarFila();">agregar producto</button>
             <button onClick="eliminarFila();">Eliminar producto</button>
+        </div>
+        <div id="divFacturacion">
+
+            <h1> Facturas compra</h1>
+
+            <table id="facturas" border="1">
+
+                <thead>
+                <th>Numero de factura</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+
+                </thead>
+                <%
+                    ArrayList<Compra> compras = gcompra.getTodos();
+                    for (Compra com : compras) {%>
+                <tr>
+
+                    <td><%= com.getId()%></td>
+                    <td><%= com.getFecha()%></td>
+                    <td><%= com.getTotal()%></td>
+                    <td><a href="factura.jsp?id=<%= com.getId()%>">Detalles</a></td>
+
+
+                </tr>
+                <%
+                    }
+
+
+                %>
+
+            </table>
+
+
         </div>
 
 
