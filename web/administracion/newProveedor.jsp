@@ -43,12 +43,12 @@
                 <table id="newProveedor" border="1" >
 
                     <thead>
-                    
+
                     <th>Nombre proveedor</th>
 
                     </thead>
                     <tr>
-                        
+
                         <td><input type="Text" name="nombre" placeholder="Ingrese el Nombre"></td>
 
 
@@ -65,7 +65,9 @@
 
 
 
-
+        <br>
+        <br>
+        <a href="panel.jsp">Regresar</a>
     </body>
 
 </html>

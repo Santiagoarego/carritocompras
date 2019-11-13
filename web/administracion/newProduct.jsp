@@ -66,7 +66,9 @@
 
 
 
-
+        <br>
+        <br>
+        <a href="panel.jsp">Regresar</a>
     </body>
 
 </html>

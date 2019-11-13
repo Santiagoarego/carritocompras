@@ -26,7 +26,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="./css/master.css">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="./js/main.js"></script>
 
     </head>
@@ -42,19 +42,19 @@
 
         %>
 
-        <div>
-            <input type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
-            <input type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
-            <input type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
-            <a href="newProduct.jsp"><button>Crear producto</button></a>
-            <a href="newProveedor.jsp"><button>Crear proveedor</button></a>
+        <div class="text-center">
+            <input  class="btn btn-info" type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
+            <input  class="btn btn-info" type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
+            <input  class="btn btn-info" type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
+            <a  class="btn btn-info" href="newProduct.jsp">Crear producto</a>
+            <a  class="btn btn-info" href="newProveedor.jsp">Crear proveedor</a>
 
         </div>
 
 
-        <div id="divControlProducto">
+        <div class="container" id="divControlProducto">
             <h1> Control Producto</h1>
-            <table id="controlProducto" border="1">
+            <table class="table table-bordered" id="controlProducto" >
 
                 <thead>
                 <th>FOTO</th>
@@ -74,7 +74,7 @@
                     <td><%= prod.getPrecioCompra()%></td>
                     <td><%= prod.getPrecioVenta()%></td>
                     <td><%= prod.getExistencias()%></td>
-                    <td></td>
+                    <td class="text-center"><a class="btn btn-warning" href="modificar.jsp?id=<%= prod.getId()%>&nombre=<%= prod.getNombre()%>&precioVenta=<%= prod.getPrecioVenta()%>">Modificar</a></td>
                 </tr>
                 <%
                     }
@@ -159,7 +159,7 @@
                 <h2>Factura</h2>
                 <table id="totalProductos" border="1">
                     <thead>
-                    <th>ID</th>
+                    <th >ID</th>
                     <th>Producto</th>
                     <th>Precio compra</th>
                     <th>Cantidad</th>
@@ -174,17 +174,17 @@
             <button onClick="agregarFila();">agregar producto</button>
             <button onClick="eliminarFila();">Eliminar producto</button>
         </div>
-        <div id="divFacturacion">
+        <div class="container" id="divFacturacion">
 
             <h1> Facturas compra</h1>
 
-            <table id="facturas" border="1">
+            <table class="table table-bordered" id="facturas" border="1">
 
                 <thead>
-                <th>Numero de factura</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Acciones</th>
+                <th  class="text-center">Numero de factura</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Acciones</th>
 
                 </thead>
                 <%
@@ -192,10 +192,10 @@
                     for (Compra com : compras) {%>
                 <tr>
 
-                    <td><%= com.getId()%></td>
-                    <td><%= com.getFecha()%></td>
-                    <td><%= com.getTotal()%></td>
-                    <td><a href="factura.jsp?id=<%= com.getId()%>">Detalles</a></td>
+                    <td  class="text-center"><%= com.getId()%></td>
+                    <td class="text-center"><%= com.getFecha()%></td>
+                    <td class="text-center"><%= com.getTotal()%></td>
+                    <td class="text-center"><a class="btn btn-primary" href="factura.jsp?id=<%= com.getId()%>">Detalles</a></td>
 
 
                 </tr>
