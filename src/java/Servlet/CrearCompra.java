@@ -48,36 +48,36 @@ public class CrearCompra extends HttpServlet {
         } else {
             credito = 1;
         }
-
+        
         for (int i = 1; i <= cantidadFactura; i++) {
-
+            
             Float precio = Float.parseFloat(request.getParameter("precio" + i));
             int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
             int idproducto = Integer.parseInt(request.getParameter("id" + i));
             gp.actualizarProducto(idproducto, cantidad, precio);
-
+            
             total += cantidad * precio;
-
+            
         }
         compra = new Compra(idproveedor, total, fecha, credito, 0);
-
+        
         if (gc.crearCompra(compra)) {
             response.getWriter().print("La compra ha sida registrado correctamente");
             for (int i = 1; i <= cantidadFactura; i++) {
-
+                
                 Float precio = Float.parseFloat(request.getParameter("precio" + i));
                 int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
                 int idproducto = Integer.parseInt(request.getParameter("id" + i));
-
+                
                 gc.crearDetalles(gc.getLastCompra().getId(), idproducto, precio, cantidad);
-
+                
             }
-
+            
         } else {
             response.getWriter().print("El producto no ha sido registrado correctamente");
-
+            
         }
-
+        response.sendRedirect("factura.jsp?id=" + gc.getLastCompra().getId());
         response.getWriter().print("Asociado a la compra " + gc.getLastCompra().getId());
     }
 
