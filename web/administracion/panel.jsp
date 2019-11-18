@@ -19,6 +19,7 @@
     GestionProducto gp = new GestionProducto();
     GestionProveedor gprov = new GestionProveedor();
     GestionCompra gcompra = new GestionCompra();
+    
 %>
 <!DOCTYPE html>
 <html>

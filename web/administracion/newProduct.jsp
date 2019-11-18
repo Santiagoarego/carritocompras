@@ -16,6 +16,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -38,37 +39,28 @@
 
 
 
-        <div id="divCrearProducto">
-            <form id="newproduct" action="CrearProducto" method="post">
-                <table id="newProduct" border="1" >
-
-                    <thead>
-
-                    <th>Nombre</th>
-                    <th>Foto</th>
-
-                    </thead>
-                    <tr>
-
-                        <td><input type="Text" name="nombre" placeholder="Ingrese el Nombre"></td>
-                        <td><input type="file" name="foto" accept="image/png, .jpeg, .jpg, image/gif"></td>
-
-
-                    </tr>
+        <div class="container" id="divCrearProducto">
+            <center>
+                <form id="newproduct" class="form-control" action="CrearProducto" method="post" style="width: 500px; height: 400px">
 
 
 
-                </table>
 
-                <input type="submit" value="Guardar producto">
-            </form>
+                    Nombre
+                    <input type="Text" class="form-control" name="nombre" placeholder="Ingrese el Nombre"><br>
+                    Foto
+                    <input type="file" class="form-control" name="foto" accept="image/png, .jpeg, .jpg, image/gif">
+                    <br>
+                    <input class="btn btn-success" type="submit" value="Guardar producto">
+                    <a class="btn btn-info" href="panel.jsp">Regresar</a>
+                </form>
+            </center>
         </div>
 
 
 
-        <br>
-        <br>
-        <a href="panel.jsp">Regresar</a>
+
+
     </body>
 
 </html>
