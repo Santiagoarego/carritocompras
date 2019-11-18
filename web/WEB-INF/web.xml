@@ -28,6 +28,10 @@
         <servlet-name>Facturacion</servlet-name>
         <servlet-class>Servlet.Facturacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PagarFactura</servlet-name>
+        <servlet-class>Servlet.PagarFactura</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearUsuario</servlet-name>
         <url-pattern>/cliente/registrar</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Facturacion</servlet-name>
         <url-pattern>/administracion/Facturacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagarFactura</servlet-name>
+        <url-pattern>/administracion/PagarFactura</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

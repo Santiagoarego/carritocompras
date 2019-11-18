@@ -136,8 +136,36 @@ public class GestionCompra extends AbstractDB {
         return compras;
 
     }
+    
+    public ArrayList<Compra> getTodosCredito() {
+        ArrayList<Compra> compras = new ArrayList();
 
-    public ArrayList<Producto> getProductosCompra( int id) {
+        try {
+            Statement stmt = this.conn.createStatement();
+
+            ResultSet res = stmt.executeQuery("call getAllComprasCredito()");
+            while (res.next()) {
+                Compra com = new Compra();
+                com.setId(res.getInt("idCompra"));
+                com.setFecha(res.getString("Fecha"));
+                com.setTotal(res.getFloat("total"));
+                com.setAbono(res.getFloat("abono"));
+                com.setCredito(res.getInt("Credito"));
+
+                compras.add(com);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return compras;
+
+    }
+
+    public ArrayList<Producto> getProductosCompra(int id) {
         ArrayList<Producto> compras = new ArrayList();
 
         try {
@@ -148,12 +176,71 @@ public class GestionCompra extends AbstractDB {
 
             res = stmt.executeQuery();
             while (res.next()) {
-                Producto prod= new Producto();
-               prod.setNombre(res.getString("Nombre"));
-               prod.setPrecioCompra(res.getFloat("precio"));
-               prod.setExistencias(res.getInt("cantidad"));
+                Producto prod = new Producto();
+                prod.setNombre(res.getString("Nombre"));
+                prod.setPrecioCompra(res.getFloat("precio"));
+                prod.setExistencias(res.getInt("cantidad"));
 
                 compras.add(prod);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return compras;
+
+    }
+
+    public ArrayList<Compra> getCompraFecha(String inicio, String fin) {
+        ArrayList<Compra> compras = new ArrayList();
+
+        try {
+
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getFacturaFecha(?,?)");
+            stmt.setString(1, inicio);
+            stmt.setString(2, fin);
+            res = stmt.executeQuery();
+            while (res.next()) {
+                Compra com = new Compra();
+                com.setId(res.getInt("idCompra"));
+                com.setFecha(res.getString("Fecha"));
+                com.setTotal(res.getFloat("total"));
+
+                compras.add(com);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return compras;
+
+    }
+    public ArrayList<Compra> getCompraFechaCredito(String inicio, String fin) {
+        ArrayList<Compra> compras = new ArrayList();
+
+        try {
+
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getFacturaFechaCredito(?,?)");
+            stmt.setString(1, inicio);
+            stmt.setString(2, fin);
+            res = stmt.executeQuery();
+            while (res.next()) {
+                Compra com = new Compra();
+                com.setId(res.getInt("idCompra"));
+                com.setFecha(res.getString("Fecha"));
+                com.setTotal(res.getFloat("total"));
+                com.setAbono(res.getFloat("abono"));
+
+                compras.add(com);
+                System.out.println("encontro");
 
             }
             res.close();
@@ -194,6 +281,26 @@ public class GestionCompra extends AbstractDB {
 
         return com;
 
+    }
+    
+    public boolean pagaFactura(int id, float cantidad){
+        boolean flag = false;
+        PreparedStatement pst = null;
+        try {
+            String sql = "call AbonaFactura(?,?)";
+            pst = this.conn.prepareStatement(sql);
+
+            pst.setInt(1, id);
+            pst.setFloat(2, cantidad);
+            
+
+            if (pst.executeUpdate() == 1) {
+                flag = true;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        return flag;
     }
 
     public void cierraConexion() {

@@ -48,6 +48,7 @@
             <input  class="btn btn-info" type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
             <a  class="btn btn-info" href="newProduct.jsp">Crear producto</a>
             <a  class="btn btn-info" href="newProveedor.jsp">Crear proveedor</a>
+            <input  class="btn btn-info" type="button" value="Modulo pagos" onClick="muestra_oculta('divPagosFacturas');">
 
         </div>
 
@@ -84,10 +85,11 @@
 
             </table>
         </div>
-        <div id="divAddProduct">
+        <div  id="divAddProduct">
+
             <form action="CrearCompra" id="compra" method="post" onsubmit="return validateForm();">
                 <h1> Comprar producto</h1>
-                <table border="1">
+                <table  class="table table-striped" border="1">
                     <thead>
                     <th>Proveedor</th>
                     <th>Fecha compra</th>
@@ -118,7 +120,7 @@
                 <br>
                 <h2>Seleccion de producto</h2>
 
-                <table id="addProduct" border="1" >
+                <table class="table table-striped" id="addProduct" border="1" >
 
                     <thead>
 
@@ -151,13 +153,14 @@
 
 
                 </table>
+
                 <input type='number' id='cantidadFactura'  name="cantidadFactura" value='0'>
-                <br>
+
 
                 <br>
-                <br>
+
                 <h2>Factura</h2>
-                <table id="totalProductos" border="1">
+                <table class="table table-striped" id="totalProductos" border="1">
                     <thead>
                     <th >ID</th>
                     <th>Producto</th>
@@ -173,9 +176,23 @@
             </form>
             <button onClick="agregarFila();">agregar producto</button>
             <button onClick="eliminarFila();">Eliminar producto</button>
+
         </div>
         <div class="container" id="divFacturacion">
+            <br>
+            <div syle="padding-left:400px">
+                <form action="panel.jsp" method="POST">
+                    <p>buscar factura desde
+                        <input class="form-control" type="date" name="fechaInicio">
+                        hasta
+                        <input class="form-control" type="date" name="fechaFinal">
 
+                        <input class="btn btn-success btn-sm" type="submit" value="Buscar">
+                        <a class="btn btn-danger btn-sm" href="panel.jsp">Regresar</a>
+                    </p>
+
+                </form>
+            </div>
             <h1> Facturas compra</h1>
 
             <table class="table table-bordered" id="facturas" border="1">
@@ -188,6 +205,33 @@
 
                 </thead>
                 <%
+                    String fechaInicio = request.getParameter("fechaInicio");
+                    String fechaFinal = request.getParameter("fechaFinal");
+                    if ((fechaInicio != null && fechaFinal != null) && (fechaInicio != "" || fechaFinal != "")) {
+                %>
+                <script type="text/javascript">
+                    muestra_oculta('divFacturacion');
+                </script>
+
+                <%ArrayList<Compra> compras = gcompra.getCompraFecha(fechaInicio, fechaFinal);
+                    for (Compra com : compras) {
+
+                %>
+
+                <tr>
+
+                    <td  class="text-center"><%= com.getId()%></td>
+                    <td class="text-center"><%= com.getFecha()%></td>
+                    <td class="text-center"><%= com.getTotal()%></td>
+                    <td class="text-center"><a class="btn btn-primary" href="factura.jsp?id=<%= com.getId()%>">Detalles</a></td>
+
+
+                </tr>
+
+
+                <%
+                    }
+                } else {
                     ArrayList<Compra> compras = gcompra.getTodos();
                     for (Compra com : compras) {%>
                 <tr>
@@ -200,8 +244,8 @@
 
                 </tr>
                 <%
+                        }
                     }
-
 
                 %>
 
@@ -211,7 +255,90 @@
         </div>
 
 
+        <div class="container" id="divPagosFacturas">
+            <br>
+            <h1> Modulo Pagos</h1>
+            <div syle="padding-left:400px">
+                <form action="panel.jsp" method="POST">
+                    <p>buscar factura desde
+                        <input class="form-control" type="date" name="fechaInicioFacturacion">
+                        hasta
+                        <input class="form-control" type="date" name="fechaFinalFacturacion">
 
+                        <input class="btn btn-success btn-sm" type="submit" value="Buscar">
+                        <a class="btn btn-danger btn-sm" href="panel.jsp">Regresar</a>
+                    </p>
+
+                </form>
+            </div>
+            
+
+            <table class="table table-bordered" id="facturas" border="1">
+
+                <thead>
+                <th  class="text-center">Numero de factura</th>
+                <th class="text-center">Fecha</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Abono</th>
+                <th class="text-center">Restante</th>
+                <th class="text-center">Acciones</th>
+                
+
+                </thead>
+                <%  String fechaInicioFacturacion = request.getParameter("fechaInicioFacturacion");
+                    String fechaFinalFacturacion = request.getParameter("fechaFinalFacturacion");
+                    if ((fechaInicioFacturacion != null && fechaFinalFacturacion != null) && (fechaInicioFacturacion != "" || fechaFinalFacturacion != "")) {
+                %>
+                <script type="text/javascript">
+                    muestra_oculta('divPagosFactuas');
+                </script>
+
+                <%ArrayList<Compra> comcred = gcompra.getCompraFechaCredito(fechaInicioFacturacion, fechaFinalFacturacion);
+                    for (Compra com : comcred) {
+
+                %>
+
+                <tr>
+
+                    <td  class="text-center"><%= com.getId()%></td>
+                    <td class="text-center"><%= com.getFecha()%></td>
+                    <td class="text-center"><%= com.getTotal()%></td>
+                    <td class="text-center"><%= com.getAbono()%></td>
+                    <td class="text-center"><%= (com.getTotal()-com.getAbono())%></td>
+                    <td class="text-center"><a class="btn btn-primary" href="pagos.jsp?id=<%= com.getId()%>">PAGAR</a></td>
+                    
+
+
+                </tr>
+
+
+                <%
+                    }
+                } else {
+                    ArrayList<Compra> comcred = gcompra.getTodosCredito();
+                    for (Compra com : comcred) {%>
+                <tr>
+
+                    <td  class="text-center"><%= com.getId()%></td>
+                    <td class="text-center"><%= com.getFecha()%></td>
+                    <td class="text-center"><%= com.getTotal()%></td>
+                    <td class="text-center"><%= com.getAbono()%></td>
+                    <td class="text-center"><%= (com.getTotal()-com.getAbono())%></td>
+                    <td class="text-center"><a class="btn btn-primary" href="pagos.jsp?id=<%= com.getId()%>">PAGAR</a></td>
+                    
+
+
+                </tr>
+                <%
+                        }
+                    }
+
+                %>
+
+            </table>
+
+
+        </div>
 
 
     </body>

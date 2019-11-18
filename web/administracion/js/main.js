@@ -9,6 +9,7 @@ window.onload = function () {/*hace que se cargue la función lo que predetermin
     muestra_oculta('divControlProducto');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
     muestra_oculta('divAddProduct');
     muestra_oculta('divFacturacion');
+    muestra_oculta('divPagosFacturas');
     cantidadproductos = 0;
     document.getElementById("cantidadFactura").value = 0;
 }
@@ -44,6 +45,10 @@ function agregarFila() {
     } else {
         alert("el producto ya esta");
     }
+}
+function fueraFiltro(){
+    document.getElementByName("fechaInicio").value=0;
+    document.getElementByName("fechaFinal").value=0;
 }
 
 function idCompra(id){

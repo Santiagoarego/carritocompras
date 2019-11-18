@@ -5,9 +5,7 @@
  */
 package Servlet;
 
-import administrativo.Compra;
 import gestion.GestionCompra;
-import gestion.GestionProducto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author santi
  */
-public class CrearCompra extends HttpServlet {
+public class PagarFactura extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,52 +32,14 @@ public class CrearCompra extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        GestionCompra gc = new GestionCompra();
-        GestionProducto gp = new GestionProducto();
-        Compra compra;
-        int idproveedor = Integer.parseInt(request.getParameter("proveedores"));
-        String cred = request.getParameter("credito");
-        int credito;
-        int cantidadFactura = Integer.parseInt(request.getParameter("cantidadFactura"));
-        String fecha = request.getParameter("fechacompra");
-        float total = 0;
-        if (cred == null) {
-            credito = 0;
-        } else {
-            credito = 1;
+        int id = Integer.parseInt(request.getParameter("id"));
+        float cantidad = Float.parseFloat(request.getParameter("pago"));
+        GestionCompra gc=new GestionCompra();
+        
+        if(gc.pagaFactura(id,cantidad)){
+            response.sendRedirect("prueba.jsp");
         }
         
-        for (int i = 1; i <= cantidadFactura; i++) {
-            
-            Float precio = Float.parseFloat(request.getParameter("precio" + i));
-            int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
-            int idproducto = Integer.parseInt(request.getParameter("id" + i));
-            gp.actualizarProducto(idproducto, cantidad, precio);
-            
-            total += cantidad * precio;
-            gc.ProveedorProducto(idproveedor, idproducto);
-            
-        }
-        compra = new Compra(idproveedor, total, fecha, credito, 0);
-        
-        if (gc.crearCompra(compra)) {
-            response.getWriter().print("La compra ha sida registrado correctamente");
-            for (int i = 1; i <= cantidadFactura; i++) {
-                
-                Float precio = Float.parseFloat(request.getParameter("precio" + i));
-                int cantidad = Integer.parseInt(request.getParameter("cantidad" + i));
-                int idproducto = Integer.parseInt(request.getParameter("id" + i));
-                
-                gc.crearDetalles(gc.getLastCompra().getId(), idproducto, precio, cantidad);
-                
-            }
-            
-        } else {
-            response.getWriter().print("El producto no ha sido registrado correctamente");
-            
-        }
-        response.sendRedirect("factura.jsp?id=" + gc.getLastCompra().getId());
-        response.getWriter().print("Asociado a la compra " + gc.getLastCompra().getId());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
