@@ -17,6 +17,15 @@
    
 
 %>
+<%  
+        if (username != null && sesion.getAttribute("rango").equals(2)) {
+            response.getWriter().print("Bienvenido " + username.toString());
+        } else {
+            response.getWriter().print("Acceso denegado");
+            response.sendRedirect("index.jsp");
+        }
+
+    %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,14 +37,14 @@
        <div class="container">
             <h1>Modificar Producto</h1>
             <hr>
-            <form action="" method="post" class="form-control" style="width: 500px; height: 400px">
+            <form action="ModificarProducto" method="post" class="form-control" style="width: 500px; height: 400px">
                 ID:
-                <input type="text" readonly="" class="form-control" value="<%= idProd%>"/>
+                <input type="number" readonly="" name="id" class="form-control" value="<%= idProd%>"/>
                  Nombres:
-                <input type="text" name="txtNom" class="form-control" value="<%= nombre%>"/><br>
+                <input type="text" name="nombre" class="form-control" value="<%= nombre%>"/><br>
               
                 Precio Venta:
-                <input type="text" name="txtDNI" class="form-control" value="<%= precom%>"/>
+                <input type="text" name="precio" class="form-control" value="<%= precom%>"/>
                  <br>
                 <input type="submit" value="Guardar" class="btn btn-success "/>
                 

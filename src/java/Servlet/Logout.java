@@ -5,19 +5,19 @@
  */
 package Servlet;
 
-import gestion.GestionCompra;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author santi
  */
-public class PagarFactura extends HttpServlet {
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,15 +31,9 @@ public class PagarFactura extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        int id = Integer.parseInt(request.getParameter("id"));
-        float cantidad = Float.parseFloat(request.getParameter("pago"));
-        GestionCompra gc=new GestionCompra();
-        
-        if(gc.pagaFactura(id,cantidad)){
-            response.sendRedirect("pagoExitoso.jsp");
-        }
-        
+        HttpSession sesion=request.getSession(true);
+        sesion.invalidate();
+        response.sendRedirect("../index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

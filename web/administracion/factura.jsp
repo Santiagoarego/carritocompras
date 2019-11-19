@@ -14,7 +14,12 @@
 <%
     HttpSession sesion = request.getSession(true);
     Object username = sesion.getAttribute("username") == null ? null : sesion.getAttribute("username");
-
+if (username != null && sesion.getAttribute("rango").equals(2)) {
+            response.getWriter().print("Bienvenido " + username.toString());
+        } else {
+            response.getWriter().print("Acceso denegado");
+            response.sendRedirect("index.jsp");
+        }
     int idCompra = Integer.parseInt(request.getParameter("id"));
     GestionProducto gp = new GestionProducto();
 
@@ -24,6 +29,7 @@
     ArrayList<Producto> detalles = gcompra.getProductosCompra(idCompra);
 
 %>
+
 <!DOCTYPE html>
 <html>
     <head>

@@ -32,6 +32,14 @@
         <servlet-name>PagarFactura</servlet-name>
         <servlet-class>Servlet.PagarFactura</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Servlet.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificarProducto</servlet-name>
+        <servlet-class>Servlet.ModificarProducto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearUsuario</servlet-name>
         <url-pattern>/cliente/registrar</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>PagarFactura</servlet-name>
         <url-pattern>/administracion/PagarFactura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/administracion/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarProducto</servlet-name>
+        <url-pattern>/administracion/ModificarProducto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

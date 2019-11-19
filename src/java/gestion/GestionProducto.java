@@ -65,6 +65,23 @@ public class GestionProducto extends AbstractDB {
             System.err.println(E.getMessage());
         }
     }
+    
+    public void modificarProducto(int id, String nombre,float precio) {
+        PreparedStatement pst = null;
+        try {
+            String sql = "call modificarProducto(?,?,?)";
+            pst = this.conn.prepareStatement(sql);
+            pst.setInt(1,id);
+            pst.setString(2, nombre);
+            pst.setFloat(3, precio);
+            
+            pst.executeQuery();
+
+        } catch (Exception E) {
+            System.err.println(E.getMessage());
+        }
+    }
+
 
     public ArrayList<Producto> getTodos() {
         ArrayList<Producto> productos = new ArrayList();

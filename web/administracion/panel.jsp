@@ -19,7 +19,7 @@
     GestionProducto gp = new GestionProducto();
     GestionProveedor gprov = new GestionProveedor();
     GestionCompra gcompra = new GestionCompra();
-    
+
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +29,11 @@
         <title>JSP Page</title>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="./js/main.js"></script>
-
+        <style>
+            div {
+                background-image: url('./img/FONDO.jpg');
+            }
+        </style>
     </head>
 
     <body>
@@ -43,18 +47,18 @@
 
         %>
 
-        <div class="text-center">
+        <div  class="text-center">
             <input  class="btn btn-info" type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
             <input  class="btn btn-info" type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
             <input  class="btn btn-info" type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
             <a  class="btn btn-info" href="newProduct.jsp">Crear producto</a>
             <a  class="btn btn-info" href="newProveedor.jsp">Crear proveedor</a>
             <input  class="btn btn-info" type="button" value="Modulo pagos" onClick="muestra_oculta('divPagosFacturas');">
-
+            <a  class="btn btn-danger" href="logout">Cerrar Sesion</a>
         </div>
 
 
-        <div class="container" id="divControlProducto">
+        <div  class="container" id="divControlProducto">
             <h1> Control Producto</h1>
             <table class="table table-bordered" id="controlProducto" >
 
@@ -86,7 +90,7 @@
 
             </table>
         </div>
-        <div  id="divAddProduct">
+        <div   class="container" id="divAddProduct">
 
             <form action="CrearCompra" id="compra" method="post" onsubmit="return validateForm();">
                 <h1> Comprar producto</h1>
@@ -179,7 +183,7 @@
             <button onClick="eliminarFila();">Eliminar producto</button>
 
         </div>
-        <div class="container" id="divFacturacion">
+        <div  class="container" id="divFacturacion">
             <br>
             <div syle="padding-left:400px">
                 <form action="panel.jsp" method="POST">
@@ -256,7 +260,7 @@
         </div>
 
 
-        <div class="container" id="divPagosFacturas">
+        <div      class="container" id="divPagosFacturas">
             <br>
             <h1> Modulo Pagos</h1>
             <div syle="padding-left:400px">
@@ -272,7 +276,7 @@
 
                 </form>
             </div>
-            
+
 
             <table class="table table-bordered" id="facturas" border="1">
 
@@ -283,7 +287,7 @@
                 <th class="text-center">Abono</th>
                 <th class="text-center">Restante</th>
                 <th class="text-center">Acciones</th>
-                
+
 
                 </thead>
                 <%  String fechaInicioFacturacion = request.getParameter("fechaInicioFacturacion");
@@ -305,9 +309,9 @@
                     <td class="text-center"><%= com.getFecha()%></td>
                     <td class="text-center"><%= com.getTotal()%></td>
                     <td class="text-center"><%= com.getAbono()%></td>
-                    <td class="text-center"><%= (com.getTotal()-com.getAbono())%></td>
+                    <td class="text-center"><%= (com.getTotal() - com.getAbono())%></td>
                     <td class="text-center"><a class="btn btn-primary" href="pagos.jsp?id=<%= com.getId()%>">PAGAR</a></td>
-                    
+
 
 
                 </tr>
@@ -324,9 +328,9 @@
                     <td class="text-center"><%= com.getFecha()%></td>
                     <td class="text-center"><%= com.getTotal()%></td>
                     <td class="text-center"><%= com.getAbono()%></td>
-                    <td class="text-center"><%= (com.getTotal()-com.getAbono())%></td>
+                    <td class="text-center"><%= (com.getTotal() - com.getAbono())%></td>
                     <td class="text-center"><a class="btn btn-primary" href="pagos.jsp?id=<%= com.getId()%>">PAGAR</a></td>
-                    
+
 
 
                 </tr>
