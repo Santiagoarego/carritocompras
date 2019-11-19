@@ -30,8 +30,16 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="./js/main.js"></script>
         <style>
-            div {
-                background-image: url('./img/FONDO.jpg');
+            body {
+                background: url(../img/FONDO.jpg)  center top;
+                background-repeat: no-repeat;
+                background-attachment: fixed
+            }
+            table{
+                background-color: white;
+            }
+            div{
+                background-color:rgba(255,255,255,0.6);
             }
         </style>
     </head>
@@ -47,7 +55,7 @@
 
         %>
 
-        <div  class="text-center">
+        <div  class="container text-center">
             <input  class="btn btn-info" type="button" value="Informacion productos" onClick="muestra_oculta('divControlProducto');">
             <input  class="btn btn-info" type="button" value="Comprar productos" onClick="muestra_oculta('divAddProduct');">
             <input  class="btn btn-info" type="button" value="Facturas" onClick="muestra_oculta('divFacturacion');">
@@ -159,7 +167,7 @@
 
                 </table>
 
-                <input type='number' id='cantidadFactura'  name="cantidadFactura" value='0'>
+                <input type='hidden' id='cantidadFactura'  name="cantidadFactura" value='0'>
 
 
                 <br>

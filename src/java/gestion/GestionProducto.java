@@ -111,6 +111,36 @@ public class GestionProducto extends AbstractDB {
         return productos;
 
     }
+    public ArrayList<Producto> getBusqueda(String nombre) {
+        ArrayList<Producto> productos = new ArrayList();
+
+        try {
+
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getBusqueda(?)");
+            stmt.setString(1, nombre);
+
+            res = stmt.executeQuery();
+            while (res.next()) {
+                Producto prod = new Producto();
+                prod.setId(res.getString("idProducto"));
+                prod.setNombre(res.getString("Nombre"));
+                prod.setPrecioVenta(res.getFloat("precioVenta"));
+                prod.setExistencias(res.getInt("Existencias"));
+                prod.setNombreFoto(res.getString("nombreFoto"));
+
+                productos.add(prod);
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return productos;
+
+    }
 
     public void cierraConexion() {
         try {
