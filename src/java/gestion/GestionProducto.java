@@ -50,38 +50,52 @@ public class GestionProducto extends AbstractDB {
         return flag;
     }
 
-    public void actualizarProducto(int id, int cantidad,float precio) {
+    public void actualizarProducto(int id, int cantidad, float precio) {
         PreparedStatement pst = null;
         try {
             String sql = "call updateProductoCompra(?,?,?)";
             pst = this.conn.prepareStatement(sql);
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             pst.setInt(2, cantidad);
             pst.setFloat(3, precio);
-            
+
             pst.executeQuery();
 
         } catch (Exception E) {
             System.err.println(E.getMessage());
         }
     }
-    
-    public void modificarProducto(int id, String nombre,float precio) {
+
+    public void restarExistencia(int id, int cantidad) {
+        PreparedStatement pst = null;
+        try {
+            String sql = "call updateProductoVenta(?,?)";
+            pst = this.conn.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.setInt(2, cantidad);
+
+            pst.executeQuery();
+
+        } catch (Exception E) {
+            System.err.println(E.getMessage());
+        }
+    }
+
+    public void modificarProducto(int id, String nombre, float precio) {
         PreparedStatement pst = null;
         try {
             String sql = "call modificarProducto(?,?,?)";
             pst = this.conn.prepareStatement(sql);
-            pst.setInt(1,id);
+            pst.setInt(1, id);
             pst.setString(2, nombre);
             pst.setFloat(3, precio);
-            
+
             pst.executeQuery();
 
         } catch (Exception E) {
             System.err.println(E.getMessage());
         }
     }
-
 
     public ArrayList<Producto> getTodos() {
         ArrayList<Producto> productos = new ArrayList();
@@ -111,6 +125,7 @@ public class GestionProducto extends AbstractDB {
         return productos;
 
     }
+
     public ArrayList<Producto> getBusqueda(String nombre) {
         ArrayList<Producto> productos = new ArrayList();
 
@@ -151,4 +166,32 @@ public class GestionProducto extends AbstractDB {
     }
     //==========================================================================
 
+    public Producto getProducto(int id) {
+        Producto prod = new Producto();
+
+        try {
+
+            ResultSet res;
+            PreparedStatement stmt = this.conn.prepareStatement("call getProducto(?)");
+            stmt.setInt(1, id);
+
+            res = stmt.executeQuery();
+            while (res.next()) {
+
+                prod.setId(res.getString("idProducto"));
+                prod.setNombre(res.getString("Nombre"));
+                prod.setPrecioVenta(res.getFloat("precioVenta"));
+                prod.setExistencias(res.getInt("Existencias"));
+                prod.setNombreFoto(res.getString("nombreFoto"));
+
+            }
+            res.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
+        return prod;
+
+    }
 }

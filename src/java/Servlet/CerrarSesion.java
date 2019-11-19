@@ -5,15 +5,10 @@
  */
 package Servlet;
 
-import administrativo.Producto;
-import administrativo.Usuario;
-import gestion.GestionUsuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.console;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +18,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author santi
  */
-public class AutenticarCliente extends HttpServlet {
+@WebServlet(name = "CerrarSesion", urlPatterns = {"/cliente/CerrarSesion"})
+public class CerrarSesion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,34 +33,12 @@ public class AutenticarCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Usuario us = new Usuario(username, password);
-        GestionUsuario gu = new GestionUsuario();
-        HttpSession sesion = request.getSession(true);
-        out.println("<p>Entro a usuario" + username + " " + password + "</p>");
-        if (gu.loginUsuario(username, password) != null) {
-            Usuario user = gu.loginUsuario(username, password);
-            out.println("<p>Entro a usuario</p>" + user.getUsuario() + user.getRango() + user.getCorreo());
-            if (user.getRango() == 1) {
-                sesion.setAttribute("id", user.getId());
-                sesion.setAttribute("username", username);
-                sesion.setAttribute("correo", user.getCorreo());
-                sesion.setAttribute("rango", user.getRango());
-                sesion.setAttribute("cart",new ArrayList<Producto>());
-                response.sendRedirect("./panel.jsp");
-            } else {
-                out.println("<p>no Entro a rango</p>" + user.getUsuario() + user.getRango());
-                response.sendRedirect("index.jsp");
-            }
-        } else {
-            out.println("null");
-            response.sendRedirect("index.jsp");
-        }
+         HttpSession sesion=request.getSession(true);
+        sesion.invalidate();
+        response.sendRedirect("../index.jsp");
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

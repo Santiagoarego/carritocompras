@@ -40,6 +40,22 @@
         <servlet-name>ModificarProducto</servlet-name>
         <servlet-class>Servlet.ModificarProducto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AgregaCarrito</servlet-name>
+        <servlet-class>Servlet.AgregaCarrito</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarCarrito</servlet-name>
+        <servlet-class>Servlet.EliminarCarrito</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearVenta</servlet-name>
+        <servlet-class>Servlet.CrearVenta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PagarVenta</servlet-name>
+        <servlet-class>Servlet.PagarVenta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CrearUsuario</servlet-name>
         <url-pattern>/cliente/registrar</url-pattern>
@@ -79,6 +95,22 @@
     <servlet-mapping>
         <servlet-name>ModificarProducto</servlet-name>
         <url-pattern>/administracion/ModificarProducto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregaCarrito</servlet-name>
+        <url-pattern>/cliente/AgregaCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarCarrito</servlet-name>
+        <url-pattern>/cliente/EliminarCarrito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearVenta</servlet-name>
+        <url-pattern>/cliente/CrearVenta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagarVenta</servlet-name>
+        <url-pattern>/cliente/PagarVenta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
