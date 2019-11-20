@@ -8,7 +8,8 @@
 * Provide basic http authentication for admin page and user.
 
 > Full instructions are given in spanish.
-
+# VIDEO DE USO
+https://youtu.be/ufXb7WxsPYo
 
 # Sistema web para la administración de tienda virtual.
 
